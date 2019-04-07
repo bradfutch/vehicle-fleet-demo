@@ -34,8 +34,8 @@
 		<dependencies>
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-starter-parent</artifactId>
-				<version>Greenwhich.RELEASE</version>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>Greenwich.RELEASE</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -55,6 +55,14 @@
 	</build>
 
 	<repositories>
+    <repository>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>mvn-central</id>
+      <name>Maven Repository Switchboard</name>
+      <url>http://repo1.maven.org/maven2</url>
+    </repository>
 		<repository>
 			<id>spring-snapshots</id>
 			<name>Spring Snapshots</name>
