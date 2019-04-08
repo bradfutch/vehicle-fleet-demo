@@ -1,0 +1,9 @@
+---
+cf-api-uri: https://api.sys.novato.cf-app.com
+cf-target-url: https://api.sys.novato.cf-app.com
+git-uri: https://github.com/bradfutch/vehicle-fleet-demo.git
+git-branch: master
+cf-username: ci
+cf-password: p1v0t4l
+cf-org: pivotal
+cf-space: sandbox

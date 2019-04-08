@@ -31,7 +31,12 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-netflix-hystrix-dashboard</artifactId>
 		</dependency>
-		<dependency>
+    <dependency>
+      <groupId>com.netflix.hystrix</groupId>
+      <artifactId>hystrix-javanica</artifactId>
+      <version>1.5.18</version>
+    </dependency>
+    <dependency>
 			<groupId>org.demo</groupId>
 			<artifactId>config-bootstrap</artifactId>
 			<version>${project.version}</version>
@@ -87,6 +92,16 @@
 		</dependency>
 	</dependencies>
 
+	<repositories>
+    <repository>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>mvn-central</id>
+      <name>Maven Repository Switchboard</name>
+      <url>http://repo1.maven.org/maven2</url>
+    </repository>
+	</repositories>
 	<build>
 		<plugins>
 			<plugin>
