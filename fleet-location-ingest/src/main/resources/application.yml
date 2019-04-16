@@ -8,4 +8,5 @@ spring:
       bindings:
         output:
           destination: vehicles
+          binder: rabbit
 
