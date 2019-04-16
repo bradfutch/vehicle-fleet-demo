@@ -23,6 +23,7 @@ import org.springframework.boot.SpringApplication;
 //import org.springframework.boot.actuate.autoconfigure.ExportMetricWriter;
 //import org.springframework.boot.actuate.metrics.repository.InMemoryMetricRepository;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.task.TaskExecutionAutoConfiguration;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -40,7 +41,7 @@ import org.springframework.web.client.RestTemplate;
  * @author Gunnar Hillert
  *
  */
-@SpringBootApplication
+@SpringBootApplication(exclude = {TaskExecutionAutoConfiguration.class})
 @EnableDiscoveryClient
 @EnableCircuitBreaker
 @EnableScheduling

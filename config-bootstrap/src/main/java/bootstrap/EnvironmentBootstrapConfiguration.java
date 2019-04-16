@@ -40,8 +40,7 @@ public class EnvironmentBootstrapConfiguration implements EnvironmentPostProcess
 	private static final String CONFIG_SERVER_BOOTSTRAP = "configServerBootstrap";
 
 	@Override
-	public void postProcessEnvironment(ConfigurableEnvironment environment,
-			SpringApplication application) {
+	public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {
 		if (!environment.getPropertySources().contains(CONFIG_SERVER_BOOTSTRAP)) {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("spring.cloud.config.uri",

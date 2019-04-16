@@ -79,8 +79,8 @@ jobs:
       resource: cf-env
       params:
         command: create-service
-        service: p-mysql
-        plan: 100mb
+        service: p.mysql
+        plan: db-small
         service_instance: mysql
         timeout: 300
         wait_for_service: true
@@ -93,7 +93,7 @@ jobs:
         service_instance: configserver
         timeout: 300
         wait_for_service: true
-        configuration: '{ "count": 2, "git": { "uri": "https://github.com/bkamysz-pivotal/vehicle-config-repo", "cloneOnStart": "true" } }'
+        configuration: '{ "count": 2, "git": { "uri": "https://github.com/bradfutch/vehicle-config-repo", "cloneOnStart": "true" } }'
     - put: cf-create-service
       resource: cf-env
       params:
