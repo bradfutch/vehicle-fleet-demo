@@ -44,7 +44,7 @@ public class ServiceLocationBulkUploadController {
 	@RequestMapping(value="/bulk/serviceLocations", method=RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
 	public void upload(@RequestBody List<ServiceLocation> locations) {
-		this.repository.save(locations);
+		this.repository.saveAll(locations);
 	}
 
 	@RequestMapping(value="/purge", method=RequestMethod.POST)

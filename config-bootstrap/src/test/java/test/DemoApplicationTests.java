@@ -21,16 +21,16 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.test.IntegrationTest;
-import org.springframework.boot.test.SpringApplicationConfiguration;
+//import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import test.DemoApplicationTests.DemoApplication;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = DemoApplication.class)
-@IntegrationTest({"CONFIG_SERVER_URI:http://testserver", "server.port=0", "debug=true"})
+//@SpringApplicationConfiguration(classes = DemoApplication.class)
+@SpringBootTest({"CONFIG_SERVER_URI:http://testserver", "server.port=0", "debug=true"})
 @WebAppConfiguration
 public class DemoApplicationTests {
 

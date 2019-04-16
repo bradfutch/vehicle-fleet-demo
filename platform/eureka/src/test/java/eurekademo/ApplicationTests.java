@@ -16,9 +16,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = EurekaApplication.class)
+@SpringBootTest(classes = EurekaApplication.class, properties = "local.server.port=0")
 @WebAppConfiguration
-@TestPropertySource(properties="server.port=0")
 public class ApplicationTests {
 	
 	@Value("${local.server.port}")

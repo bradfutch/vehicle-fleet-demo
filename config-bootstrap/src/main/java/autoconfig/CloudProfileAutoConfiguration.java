@@ -16,8 +16,6 @@
 
 package autoconfig;
 
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
-import org.springframework.boot.autoconfigure.cloud.CloudAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.cloud.Cloud;
 import org.springframework.cloud.CloudFactory;
@@ -32,7 +30,6 @@ import org.springframework.context.annotation.Profile;
 @ConditionalOnClass(Cloud.class)
 @Configuration
 @Profile("cloud")
-@AutoConfigureBefore(CloudAutoConfiguration.class)
 public class CloudProfileAutoConfiguration {
 
 	@Bean

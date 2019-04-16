@@ -25,9 +25,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.IntegrationTest;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.boot.test.TestRestTemplate;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.hateoas.Resource;
@@ -35,6 +34,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.rules.SpringClassRule;
 import org.springframework.test.context.junit4.rules.SpringMethodRule;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -42,9 +42,9 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@SpringApplicationConfiguration(classes = ServiceLocationServiceApplication.class)
+@SpringBootTest(classes = ServiceLocationServiceApplication.class)
 @WebAppConfiguration
-@IntegrationTest("server.port=0")
+@TestPropertySource(properties = "server.port=0")
 public class RestServiceIntegrationTests {
 
 	@Value("${local.server.port}")
@@ -72,7 +72,7 @@ public class RestServiceIntegrationTests {
 					new ClassPathResource("locations.json").getInputStream(),
 					new TypeReference<List<ServiceLocation>>() {
 					});
-			this.repository.save(values);
+			this.repository.saveAll(values);
 		}
 	}
 

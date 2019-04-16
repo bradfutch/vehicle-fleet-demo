@@ -18,17 +18,21 @@ package demo;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.actuate.autoconfigure.ExportMetricWriter;
-import org.springframework.boot.actuate.metrics.repository.InMemoryMetricRepository;
+//import org.springframework.boot.actuate.autoconfigure.ExportMetricWriter;
+//import org.springframework.boot.actuate.metrics.repository.InMemoryMetricRepository;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 import de.micromata.opengis.kml.v_2_2_0.Kml;
+import org.springframework.web.client.RestTemplate;
 
 /**
  * Main entry point for the GpsSimulator application.
@@ -46,11 +50,23 @@ public class GpsSimulatorApplication {
 		SpringApplication.run(GpsSimulatorApplication.class, args);
 	}
 
-	@Bean
-	@ExportMetricWriter
-	public InMemoryMetricRepository inMemoryMetricRepository() {
-		return new InMemoryMetricRepository();
-	}
+    @Bean
+    @LoadBalanced
+    public RestTemplate restTemplate(RestTemplateBuilder builder) {
+        // Do any additional configuration here
+        return builder.build();
+    }
+
+    @Autowired
+    @LoadBalanced
+    private RestTemplate restTemplate;
+
+
+	//@Bean
+	//@ExportMetricWriter
+	//public InMemoryMetricRepository inMemoryMetricRepository() {
+		//return new InMemoryMetricRepository();
+	//}
 
 	@Bean
 	public Jaxb2Marshaller getMarshaller() {

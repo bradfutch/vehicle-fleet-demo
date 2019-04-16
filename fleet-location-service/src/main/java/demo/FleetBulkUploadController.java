@@ -44,7 +44,7 @@ public class FleetBulkUploadController {
 	@RequestMapping(value="/fleet", method=RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
 	public void upload(@RequestBody List<Location> trucks) throws Exception {
-		this.repository.save(trucks);
+		this.repository.saveAll(trucks);
 	}
 
 	@RequestMapping(value="/purge", method=RequestMethod.POST)

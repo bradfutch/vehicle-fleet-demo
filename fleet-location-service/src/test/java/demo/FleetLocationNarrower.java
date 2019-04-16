@@ -24,6 +24,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Configuration;
@@ -85,7 +86,7 @@ public class FleetLocationNarrower implements CommandLineRunner {
 	}
 
 	public static void main(String[] args) {
-		new SpringApplicationBuilder(FleetLocationNarrower.class).web(false)
+		new SpringApplicationBuilder(FleetLocationNarrower.class).web(WebApplicationType.NONE)
 		.properties("spring.jackson.serialization.INDENT_OUTPUT=true").run(args);
 	}
 

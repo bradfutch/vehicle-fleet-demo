@@ -26,7 +26,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
@@ -45,7 +45,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = FleetLocationServiceApplication.class)
+@SpringBootTest(classes = FleetLocationServiceApplication.class)
 @WebAppConfiguration
 @TestPropertySource(properties = "spring.jpa.showSql=true")
 public class FleetLocationTests {
@@ -85,7 +85,7 @@ public class FleetLocationTests {
 					new TypeReference<List<Location>>() {
 			});
 			assertEquals(4, value.size());
-			this.repository.save(value);
+			this.repository.saveAll(value);
 		}
 	}
 

@@ -16,38 +16,22 @@
 
 package stub.fleet;
 
-import org.springframework.boot.actuate.endpoint.Endpoint;
-import org.springframework.boot.actuate.endpoint.mvc.MvcEndpoint;
+import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
+import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Dave Syer
  *
  */
 @Component
-public class DocsAutoConfiguration implements MvcEndpoint {
+@Endpoint( id = "service")
+public class DocsAutoConfiguration {
 
-	@Override
-	public String getPath() {
-		return "/docs/service";
-	}
-
-	@Override
-	public boolean isSensitive() {
-		return false;
-	}
-
-	@Override
-	public Class<? extends Endpoint> getEndpointType() {
-		return Endpoint.class;
-	}
-	
-	@RequestMapping
+	@ReadOperation
 	public String docs() {
 		return "forward:/api-docs/index.html";
 	}
-	
 
 }
