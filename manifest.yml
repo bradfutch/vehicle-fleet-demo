@@ -13,6 +13,7 @@ applications:
 #    - zipkin
     - configserver
     - eureka
+  health-check-type: process
 - name: fleet-location-updater
   path: fleet-location-updater-1.0.0.BUILD-SNAPSHOT.jar
   services:
