@@ -31,7 +31,7 @@ applications:
 - name: service-location-service
   path: service-location-service-1.0.0.BUILD-SNAPSHOT.jar
   services:
-    - mongodb
+#    - mongodb
 #    - zipkin
     - configserver
     - eureka

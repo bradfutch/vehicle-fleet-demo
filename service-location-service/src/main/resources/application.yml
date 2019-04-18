@@ -6,4 +6,4 @@ spring:
     name: service-location-service
   data:
     mongodb:
-      uri: ${vcap.services.mongodb.credentials.uri}
+      uri: ${vcap.services.credhub.credentials.credhub-ref}
