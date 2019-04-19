@@ -62,6 +62,14 @@ public class GpsSimulatorApplication {
     @LoadBalanced
     private RestTemplate restTemplate;
 
+    @Bean
+    public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
+        http
+                .authorizeExchange()
+                .anyExchange().permitAll();
+        return http.build();
+    }
+
 
 	//@Bean
 	//@ExportMetricWriter
