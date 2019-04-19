@@ -6,6 +6,8 @@ applications:
 #    - zipkin
     - configserver
     - eureka
+  env:
+    TRUST_CERTS: api.sys.novato.cf-app.com
 - name: fleet-location-ingest
   path: fleet-location-ingest-1.0.0.BUILD-SNAPSHOT.jar
   services:
@@ -13,6 +15,8 @@ applications:
 #    - zipkin
     - configserver
     - eureka
+  env:
+    TRUST_CERTS: api.sys.novato.cf-app.com
   health-check-type: process
 - name: fleet-location-updater
   path: fleet-location-updater-1.0.0.BUILD-SNAPSHOT.jar
@@ -21,6 +25,8 @@ applications:
 #    - zipkin
     - configserver
     - eureka
+  env:
+    TRUST_CERTS: api.sys.novato.cf-app.com
 - name: fleet-location-service
   path: fleet-location-service-1.0.0.BUILD-SNAPSHOT.jar
   services:
@@ -28,6 +34,8 @@ applications:
 #    - zipkin
     - configserver
     - eureka
+  env:
+    TRUST_CERTS: api.sys.novato.cf-app.com
 - name: service-location-service
   path: service-location-service-1.0.0.BUILD-SNAPSHOT.jar
   services:
@@ -35,6 +43,8 @@ applications:
 #    - zipkin
     - configserver
     - eureka
+  env:
+    TRUST_CERTS: api.sys.novato.cf-app.com
 - name: dashboard
   path: dashboard-1.0.0.BUILD-SNAPSHOT.jar
   host: fleet-dashboard
@@ -42,3 +52,5 @@ applications:
 #    - zipkin
     - configserver
     - eureka
+  env:
+    TRUST_CERTS: api.sys.novato.cf-app.com
