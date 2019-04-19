@@ -27,11 +27,16 @@ public class RestApi {
 	@RequestMapping("/clientConfig")
 	@ResponseBody
 	public String config() throws Exception {
+	    log.info( "/clientConfig" );
 		String url = null;
 		try {
 			url = getServiceUrl(SERVICE_LOCATION_UPDATER);
 		} catch (Exception t) {
+		    log.info( "Exception in getServiceUrl : " + t.getCause() );
 		}
+
+		log.info( "url after getServiceUrl : " + url );
+
 		return url == null || url.isEmpty() ? this.stompUrl : url + "/stomp";
 	}
 
@@ -40,11 +45,13 @@ public class RestApi {
 
 			List<ServiceInstance> instances = this.discoveryClient.getInstances(service);
 
+			if( instances.isEmpty() ) log.info( "discovery client instances are empty " );
+
             for (ServiceInstance instance : instances) {
                 log.info( "instance : " + instance.getHost() );
             }
 
-			if (instances != null && !instances.isEmpty()) {
+			if ( instances != null && !instances.isEmpty() ) {
 				ServiceInstance instance = instances.get(0);
 				String host = instance.getHost();
 				return host+(instance.getPort()==80 ? "" : ":" + instance.getPort());
