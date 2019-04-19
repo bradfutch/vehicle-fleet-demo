@@ -6,6 +6,12 @@ spring:
 gpsSimmulator:
   googleApiKey: AIzaSyDvdz2cb4zfp8NQVFu4kdzXFoIcHG744I4
 
+logging:
+  level:
+    org:
+      apache:
+        http=DEBUG:
+
 ---
 spring:
   profiles: test
