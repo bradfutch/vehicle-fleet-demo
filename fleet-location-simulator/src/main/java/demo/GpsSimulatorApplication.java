@@ -23,6 +23,7 @@ import org.springframework.boot.SpringApplication;
 //import org.springframework.boot.actuate.autoconfigure.ExportMetricWriter;
 //import org.springframework.boot.actuate.metrics.repository.InMemoryMetricRepository;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.autoconfigure.task.TaskExecutionAutoConfiguration;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
@@ -41,7 +42,7 @@ import org.springframework.web.client.RestTemplate;
  * @author Gunnar Hillert
  *
  */
-@SpringBootApplication(exclude = {TaskExecutionAutoConfiguration.class})
+@SpringBootApplication(exclude = {TaskExecutionAutoConfiguration.class, SecurityAutoConfiguration.class})
 @EnableDiscoveryClient
 @EnableCircuitBreaker
 @EnableScheduling
@@ -61,15 +62,6 @@ public class GpsSimulatorApplication {
     @Autowired
     @LoadBalanced
     private RestTemplate restTemplate;
-
-    @Bean
-    public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
-        http
-                .authorizeExchange()
-                .anyExchange().permitAll();
-        return http.build();
-    }
-
 
 	//@Bean
 	//@ExportMetricWriter
