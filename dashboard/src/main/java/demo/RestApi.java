@@ -45,7 +45,11 @@ public class RestApi {
 
 			List<ServiceInstance> instances = this.discoveryClient.getInstances(service);
 
-			if( instances.isEmpty() ) log.info( "discovery client instances are empty " );
+			if( instances.isEmpty() ) {
+			    log.info( "discovery client instances are empty " );
+                log.info( "discover client info : " + discoveryClient.description() );
+                discoveryClient.getServices().forEach( thing -> log.info("\tservice"  + thing ) );
+            }
 
             for (ServiceInstance instance : instances) {
                 log.info( "instance : " + instance.getHost() );
