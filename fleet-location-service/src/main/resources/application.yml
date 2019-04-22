@@ -4,6 +4,8 @@ spring:
   application:
     name: fleet-location-service
   jpa:
+    hibernate:
+      ddl-auto: update
     properties:
       hibernate:
         id:
