@@ -3,6 +3,10 @@ server:
 spring:
   application:
     name: fleet-location-service
+
+---
+spring:
+  profiles: cloud
   data:
     mongodb:
       uri: ${vcap.services.credhub.credentials.credhub-ref}
