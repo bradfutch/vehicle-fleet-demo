@@ -3,4 +3,8 @@ server:
 spring:
   application:
     name: fleet-location-service
-
+  jpa:
+    properties:
+      hibernate:
+        id:
+          new_generator_mappings: false
