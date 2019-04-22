@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 public class ServiceLocationConfig {
     public class AppConfig {
 
-        @Value("${spring.data.mongodb.uri}")
+        @Value("${spring.data.mongodb.uri:localhost}")
         public String mongoHost;
 
         public @Bean
