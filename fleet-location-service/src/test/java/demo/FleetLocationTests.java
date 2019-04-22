@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @author Dave Syer
  *
  */
+@Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = FleetLocationServiceApplication.class)
 @WebAppConfiguration
@@ -61,7 +63,6 @@ public class FleetLocationTests {
 		saveJson();
 	}
 
-	/*
 	@Test
 	public void findAll() throws Exception {
 		Iterable<Location> vehicles = this.repository.findAll();
@@ -74,7 +75,6 @@ public class FleetLocationTests {
 				"1FUJGBDV20LBZ2345", new PageRequest(0, 20));
 		assertEquals(1, getList(vehicles).size());
 	}
-	*/
 
 	private void saveJson() throws IOException, JsonParseException, JsonMappingException {
 		saveJson(new ClassPathResource("fleet.json"));
