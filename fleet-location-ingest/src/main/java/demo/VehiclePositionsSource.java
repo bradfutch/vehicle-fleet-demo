@@ -16,6 +16,8 @@
 package demo;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.messaging.Source;
@@ -37,11 +39,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class VehiclePositionsSource {
 
+    private Logger log = LoggerFactory.getLogger( getClass() );
+
 	@Autowired
 	private MessageChannel output;
 
 	@RequestMapping(path="/api/locations", method=RequestMethod.POST)
 	public void locations(@RequestBody String positionInfo) {
+	    log.info( "positionInfo : " + positionInfo );
 		this.output.send(MessageBuilder.withPayload(positionInfo).build());
 	}
 

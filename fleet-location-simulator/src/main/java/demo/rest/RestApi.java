@@ -26,8 +26,13 @@ import java.util.concurrent.Future;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.core.task.AsyncTaskExecutor;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import org.springframework.scheduling.quartz.SimpleThreadPoolTaskExecutor;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -55,6 +60,17 @@ import demo.task.GpsSimulatorInstance;
 @RequestMapping("/api")
 public class RestApi {
 
+    @Bean
+    public ThreadPoolTaskExecutor taskExecutor(){
+        ThreadPoolTaskExecutor pool = new ThreadPoolTaskExecutor();
+        pool.setCorePoolSize(8);
+        pool.setMaxPoolSize(16);
+        pool.setWaitForTasksToCompleteOnShutdown(true);
+        return pool;
+    }
+
+    private Logger log = LoggerFactory.getLogger( getClass() );
+
 	@Autowired
 	private PathService pathService;
 
@@ -65,7 +81,7 @@ public class RestApi {
 	private GpsSimulatorFactory gpsSimulatorFactory;
 
 	@Autowired
-	private AsyncTaskExecutor taskExecutor;
+	private ThreadPoolTaskExecutor taskExecutor;
 
 	private Map<Long, GpsSimulatorInstance> taskFutures = new HashMap<>();
 
@@ -78,7 +94,12 @@ public class RestApi {
 
 		final Set<Long> instanceIds = new HashSet<>(taskFutures.keySet());
 
+		log.info( "Simulator Requests : " + fixture.getNumberOfGpsSimulatorRequests() );
+
 		for (GpsSimulatorRequest gpsSimulatorRequest : fixture.getGpsSimulatorRequests()) {
+
+		    //log.info( "points (" + gpsSimulatorRequest.getVin() + ") : " );
+		    //NavUtils.decodePolyline( gpsSimulatorRequest.getPolyline() ).forEach( point -> log.info( "-- " + point.toString() ));
 
 			final GpsSimulator gpsSimulator = gpsSimulatorFactory.prepareGpsSimulator(gpsSimulatorRequest);
 			lookAtPoints.add(gpsSimulator.getStartPoint());
@@ -88,6 +109,7 @@ public class RestApi {
 			final GpsSimulatorInstance instance = new GpsSimulatorInstance(gpsSimulator.getId(), gpsSimulator, future);
 			taskFutures.put(gpsSimulator.getId(), instance);
 			instances.add(instance);
+			//log.info( "-- add instance : " + instance.getInstanceId() );
 		}
 
 		if (fixture.usesKmlIntegration()) {

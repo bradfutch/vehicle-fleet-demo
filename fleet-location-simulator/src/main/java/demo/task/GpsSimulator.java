@@ -25,6 +25,8 @@ import demo.model.PositionInfo;
 import demo.model.VehicleStatus;
 import demo.service.PositionService;
 import demo.support.NavUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Simulates a vehicle moving along a path defined in a kml file.
@@ -35,6 +37,8 @@ import demo.support.NavUtils;
 public class GpsSimulator implements Runnable {
 
 	private long id;
+
+	private Logger log = LoggerFactory.getLogger( getClass() );
 
 	private PositionService positionInfoService;
 
@@ -78,6 +82,8 @@ public class GpsSimulator implements Runnable {
 				return;
 			}
 			while (!Thread.interrupted()) {
+
+			    log.info( "id : " + id + " - reportInterval : + " + reportInterval + " - speed : " + getCurrentPosition().getSpeed() );
 				long startTime = new Date().getTime();
 				if (positionInfo != null) {
 					if (shouldMove) {

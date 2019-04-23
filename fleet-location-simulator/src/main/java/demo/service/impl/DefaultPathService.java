@@ -16,10 +16,15 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.xml.transform.stream.StreamSource;
 
+import com.google.maps.model.*;
+import demo.support.NavUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.oxm.Unmarshaller;
@@ -34,11 +39,6 @@ import com.google.maps.DirectionsApiRequest;
 import com.google.maps.GeoApiContext;
 import com.google.maps.GeocodingApi;
 import com.google.maps.GeocodingApiRequest;
-import com.google.maps.model.AddressComponent;
-import com.google.maps.model.AddressComponentType;
-import com.google.maps.model.DirectionsRoute;
-import com.google.maps.model.GeocodingResult;
-import com.google.maps.model.LatLng;
 
 import de.micromata.opengis.kml.v_2_2_0.Coordinate;
 import de.micromata.opengis.kml.v_2_2_0.Document;
@@ -63,6 +63,8 @@ import net.sf.sprockets.google.Places.Params;
  */
 @Service
 public class DefaultPathService implements PathService {
+
+    private Logger log = LoggerFactory.getLogger( getClass() );
 
 	@Autowired
 	private ObjectMapper objectMapper;
@@ -111,15 +113,20 @@ public class DefaultPathService implements PathService {
 
 	@Override
 	public String getCoordinatesFromGoogleAsPolyline(DirectionInput directionInput) {
-		final GeoApiContext context = new GeoApiContext().setApiKey(environment.getRequiredProperty("gpsSimmulator.googleApiKey"));
+		final GeoApiContext context = new GeoApiContext.Builder().apiKey(environment.getRequiredProperty("gpsSimmulator.googleApiKey")).build();
 		final DirectionsApiRequest request =  DirectionsApi.getDirections(
 			context,
 			directionInput.getFrom(),
 			directionInput.getTo());
 
 		try {
-			DirectionsRoute[] routes = request.await();
-			return routes[0].overviewPolyline.getEncodedPath();
+			DirectionsResult result = request.await();
+
+			//log.info( "from : " + directionInput.getFrom() + "\nto : " + directionInput.getTo() );
+			//log.info( "routes : " + result.routes.length );
+			//Arrays.asList( result.routes ).forEach( route -> log.info( "-- " + NavUtils.decodePolyline( route.overviewPolyline.getEncodedPath() )) );
+
+			return result.routes[0].overviewPolyline.getEncodedPath();
 		}
 		catch (Exception e) {
 			throw new IllegalStateException(e);
@@ -141,7 +148,7 @@ public class DefaultPathService implements PathService {
 		}
 
 		final List<ServiceLocation> serviceLocations = new ArrayList<>();
-		final GeoApiContext context = new GeoApiContext().setApiKey(environment.getRequiredProperty("gpsSimmulator.googleApiKey"));
+		final GeoApiContext context = new GeoApiContext.Builder().apiKey(environment.getRequiredProperty("gpsSimmulator.googleApiKey")).build();
 
 		for (Place place : stations) {
 			final ServiceLocation serviceLocation = new ServiceLocation(place.getLatitude(), place.getLongitude());
@@ -195,7 +202,7 @@ public class DefaultPathService implements PathService {
 	@Override
 	public List<Point> getCoordinatesFromGoogle(DirectionInput directionInput) {
 
-		final GeoApiContext context = new GeoApiContext().setApiKey(environment.getRequiredProperty("gpsSimmulator.googleApiKey"));
+		final GeoApiContext context = new GeoApiContext.Builder().apiKey(environment.getRequiredProperty("gpsSimmulator.googleApiKey")).build();
 		final DirectionsApiRequest request =  DirectionsApi.getDirections(
 			context,
 			directionInput.getFrom(),
@@ -203,9 +210,9 @@ public class DefaultPathService implements PathService {
 		List<LatLng> latlongList = null;
 
 		try {
-			DirectionsRoute[] routes = request.await();
+			DirectionsResult result = request.await();
 
-			for (DirectionsRoute route : routes) {
+			for (DirectionsRoute route : result.routes) {
 				latlongList = route.overviewPolyline.decodePath();
 			}
 		}

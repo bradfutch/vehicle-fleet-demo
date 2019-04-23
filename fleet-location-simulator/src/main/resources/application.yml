@@ -4,7 +4,7 @@ spring:
   application:
     name: fleet-location-simulator
 gpsSimmulator:
-  googleApiKey: AIzaSyDvdz2cb4zfp8NQVFu4kdzXFoIcHG744I4
+  googleApiKey: AIzaSyAKSzjFhBPdiLbVykYSLPLSyyPmdHRQSow
 
 logging:
   level:

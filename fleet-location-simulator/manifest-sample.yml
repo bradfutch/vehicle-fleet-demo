@@ -5,3 +5,4 @@ applications:
 #    - zipkin
     - configserver
     - eureka
+  path: target/fleet-location-simulator-1.0.0.BUILD-SNAPSHOT.jar

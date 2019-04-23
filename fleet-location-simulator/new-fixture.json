@@ -2,7 +2,7 @@
   "numberOfGpsSimulatorRequests": 8,
   "gpsSimulatorRequests": [
     {
-      "vin": "7c08973d-bed4-4cbd-9c28-9282a02a6032",
+      "vin": null,
       "speedInKph": 50,
       "move": true,
       "exportPositionsToKml": true,
@@ -24,7 +24,7 @@
       }
     },
     {
-      "vin": "7ca3ec62-6a22-4291-af95-d2a7d795ca7c",
+      "vin": null,
       "speedInKph": 50,
       "move": true,
       "exportPositionsToKml": true,
@@ -46,7 +46,7 @@
       }
     },
     {
-      "vin": "b594f86b-9e33-4f51-8caa-7e31bb205178",
+      "vin": null,
       "speedInKph": 50,
       "move": true,
       "exportPositionsToKml": true,
@@ -68,7 +68,7 @@
       }
     },
     {
-      "vin": "ba6d29ab-f137-47df-832a-0ba6270cb49f",
+      "vin": null,
       "speedInKph": 50,
       "move": true,
       "exportPositionsToKml": true,
@@ -90,7 +90,7 @@
       }
     },
     {
-      "vin": "4c3476fb-c60e-4970-8c3d-cb788c49f766",
+      "vin": null,
       "speedInKph": 50,
       "move": true,
       "exportPositionsToKml": true,
@@ -112,7 +112,7 @@
       }
     },
     {
-      "vin": "ccbb4295-c88b-4e3d-9b5a-07b204b9c7d9",
+      "vin": null,
       "speedInKph": 50,
       "move": true,
       "exportPositionsToKml": true,
@@ -134,7 +134,7 @@
       }
     },
     {
-      "vin": "9d22189b-9c7f-4ad8-b4f9-49aa178000c6",
+      "vin": null,
       "speedInKph": 50,
       "move": true,
       "exportPositionsToKml": true,
@@ -156,7 +156,7 @@
       }
     },
     {
-      "vin": "15dbf5c3-c0c9-4c59-8469-c2f2f0d6b7e4",
+      "vin": null,
       "speedInKph": 50,
       "move": true,
       "exportPositionsToKml": true,
